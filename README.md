@@ -1,0 +1,2 @@
+# proto-thickline
+PROTO ThickLine
