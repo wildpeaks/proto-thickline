@@ -1,0 +1,54 @@
+#VRML V2.0 utf8
+
+PROTO ThickLine [
+	exposedField  MFVec3f  spine                 []
+	exposedField  SFFloat  thickness             0.1
+	exposedField  SFFloat  thicknessTesselation  4
+	field         SFFloat  creaseAngle           0
+	field         SFBool   beginCap              TRUE
+	field         SFBool   endCap                TRUE
+]{
+	DEF extrusion Extrusion {
+		creaseAngle IS creaseAngle
+		beginCap IS beginCap
+		endCap IS endCap
+		spine []
+		crossSection []
+		orientation []
+	}
+
+	Script {
+		exposedField  MFVec3f  spine                 IS spine
+		exposedField  SFFloat  thickness             IS thickness
+		exposedField  SFFloat  thicknessTesselation  IS thicknessTesselation
+		field         SFNode   extrusion             USE extrusion
+
+		directOutput TRUE
+		url "javascript:
+
+		function refresh(){
+			var angle = 0;
+			var angleBetween = 2 * Math.PI / thicknessTesselation;
+			var positions = new MFVec2f();
+			for (var i = 0; i < thicknessTesselation; i++){
+				positions[i] = new SFVec2f(thickness * Math.sin(angle), thickness * Math.cos(angle));
+				angle += angleBetween;
+			}
+			positions[thicknessTesselation] = positions[0];
+			extrusion.set_crossSection = positions;
+			extrusion.set_spine = spine;
+		}
+
+		function spine(){}
+		function thickness(){}
+		function thicknessTesselation(){}
+		function initialize(){
+			refresh();
+		}
+		function eventsProcessed(){
+			refresh();
+		}
+
+		"
+	}
+}
