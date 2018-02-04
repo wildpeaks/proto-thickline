@@ -1,0 +1,48 @@
+#VRML V2.0 utf8
+
+EXTERNPROTO ThickLine [
+	exposedField  MFVec3f  spine
+	exposedField  SFFloat  thickness
+	exposedField  SFFloat  thicknessTesselation
+	field         SFFloat  creaseAngle
+	field         SFBool   beginCap
+	field         SFBool   endCap
+] "../src/proto.ThickLine.wrl#ThickLine"
+
+
+WorldInfo {
+	title "creaseAngle"
+}
+
+Viewpoint {
+	position 0 0 5
+	fieldOfView	0.785398
+	description "Default"
+}
+
+Shape {
+	appearance Appearance {
+		material Material {
+			emissiveColor 0 1 0
+		}
+	}
+	geometry ThickLine {
+		creaseAngle 0
+		thickness 0.5
+		thicknessTesselation 16
+		spine [-2 1 0, 2 1 0]
+	}
+}
+Shape {
+	appearance Appearance {
+		material Material {
+			emissiveColor 0 1 0
+		}
+	}
+	geometry ThickLine {
+		creaseAngle 3.14159
+		thickness 0.5
+		thicknessTesselation 16
+		spine [-2 -1 0, 2 -1 0]
+	}
+}

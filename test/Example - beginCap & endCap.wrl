@@ -1,0 +1,79 @@
+#VRML V2.0 utf8
+
+EXTERNPROTO ThickLine [
+	exposedField  MFVec3f  spine
+	exposedField  SFFloat  thickness
+	exposedField  SFFloat  thicknessTesselation
+	field         SFFloat  creaseAngle
+	field         SFBool   beginCap
+	field         SFBool   endCap
+] "../src/proto.ThickLine.wrl#ThickLine"
+
+
+WorldInfo {
+	title "beginCap & endCap"
+}
+
+Viewpoint {
+	position 0 0 5
+	fieldOfView	0.785398
+	description "Default"
+}
+
+Transform {
+	translation	-1 0 0
+	rotation 0 1 0 1.2
+	children [
+		Shape {
+			appearance Appearance {
+				material Material {
+					emissiveColor 1 0 0
+				}
+			}
+			geometry ThickLine {
+				beginCap TRUE
+				spine [-1 1 0, 1 1 0]
+			}
+		}
+		Shape {
+			appearance Appearance {
+				material Material {
+					emissiveColor 1 0 0
+				}
+			}
+			geometry ThickLine {
+				beginCap FALSE
+				spine [-1 -1 0, 1 -1 0]
+			}
+		}
+	]
+}
+
+Transform {
+	translation	1 0 0
+	rotation 0 1 0 -1.2
+	children [
+		Shape {
+			appearance Appearance {
+				material Material {
+					emissiveColor 0 1 0
+				}
+			}
+			geometry ThickLine {
+				endCap TRUE
+				spine [-1 1 0, 1 1 0]
+			}
+		}
+		Shape {
+			appearance Appearance {
+				material Material {
+					emissiveColor 0 1 0
+				}
+			}
+			geometry ThickLine {
+				endCap FALSE
+				spine [-1 -1 0, 1 -1 0]
+			}
+		}
+	]
+}

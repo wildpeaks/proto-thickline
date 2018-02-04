@@ -1,0 +1,64 @@
+#VRML V2.0 utf8
+
+EXTERNPROTO ThickLine [
+	exposedField  MFVec3f  spine
+	exposedField  SFFloat  thickness
+	exposedField  SFFloat  thicknessTesselation
+	field         SFFloat  creaseAngle
+	field         SFBool   beginCap
+	field         SFBool   endCap
+] "../src/proto.ThickLine.wrl#ThickLine"
+
+
+WorldInfo {
+	title "thicknessTesselation"
+}
+
+Viewpoint {
+	position 0 0 10
+	orientation 0.000 0.000 1.000 0.000
+	fieldOfView 0.785
+}
+
+
+Transform {
+	rotation 0 1 0 1.2
+	children [
+		Shape {
+			appearance Appearance {
+				material Material {
+					emissiveColor 0 1 0
+				}
+			}
+			geometry ThickLine {
+				thickness 0.5
+				thicknessTesselation 3
+				spine [-2 2 0, 2 2 0]
+			}
+		}
+		Shape {
+			appearance Appearance {
+				material Material {
+					emissiveColor 0 1 0
+				}
+			}
+			geometry ThickLine {
+				thickness 0.5
+				thicknessTesselation 8
+				spine [-2 0 0, 2 0 0]
+			}
+		}
+		Shape {
+			appearance Appearance {
+				material Material {
+					emissiveColor 0 1 0
+				}
+			}
+			geometry ThickLine {
+				thickness 0.5
+				thicknessTesselation 32
+				spine [-2 -2 0, 2 -2 0]
+			}
+		}
+	]
+}
